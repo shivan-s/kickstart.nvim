@@ -234,6 +234,15 @@ vim.o.termguicolors = true
 -- Column
 vim.o.colorcolumn = "80"
 
+-- Cursor
+vim.o.guicursor = "i:hor100"
+
+-- Scrolloff
+vim.o.scrolloff = 8
+
+-- Wrap
+vim.o.wrap = false
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -254,6 +263,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- [[ Custom Keymaps ]]
+
+local opts = { noremap = true, silent = true }
+
+-- Vertical navigation
+vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
+vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
+
+-- Pane navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
+vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
+vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
+vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+
+-- Stay selected when intending
+vim.keymap.set("v", ">", ">gv", opts)
+vim.keymap.set("v", "<", "<gv", opts)
+
+-- Move text
+vim.keymap.set("v", "<J>", ":m .+1<CR>==", opts)
+vim.keymap.set("v", "<K>", ":m .-2<CR>==", opts)
+vim.keymap.set("v", "p", '"_dp', opts)
+vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", opts)
+vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
+vim.keymap.set("x", "<A-j>", ":move '>.+1<CR>gv-gv", opts)
+vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -436,19 +472,33 @@ require('mason-lspconfig').setup()
 --  If you want to overridethe default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  rust_analyzer = {},
-  tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  cssls = {},
+  dockerls = {},
+  emmet_ls = {},
+  eslint = {},
+  gopls = {},
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
+  jedi_language_server = {},
+  -- More settings for jsonls
+  -- https://github.com/shivan-s/dotfiles/blob/5fad6c102fb756f1cd811635bb4dec91ba06738f/nvim/lua/user/lsp/settings/jsonls.lua
+  jsonls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
+  prettierd = {},
+  ruff_ls = {},
+  rust_analyzer = {},
+  sqlfluff = {},
+  sqlfmt = {},
+  svelte = {},
+  tailwindcss = {},
+  taplo = {},
+  tsserver = {},
+  yamlls = { keyOrdering = false },
+  zk = {},
 }
 
 -- Setup neovim lua configuration
@@ -490,11 +540,16 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-k>'] = cmp.mapping.select_next_item(),
+    ['<C-j>'] = cmp.mapping.select_prev_item(),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
+    ['C-y'] = cmp.config.disable,
+    ['C-e'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
