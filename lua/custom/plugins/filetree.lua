@@ -7,7 +7,6 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		vim.keymap.set("n", "<leader>e", ":Neotree toggle", { noremap = true, silent = true })
 		require('neo-tree').setup {}
 	end
 }

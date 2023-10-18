@@ -241,7 +241,7 @@ vim.o.guicursor = "i:hor100"
 vim.o.scrolloff = 8
 
 -- Wrap
-vim.o.wrap = false
+vim.o.nowrap = true
 
 -- [[ Basic Keymaps ]]
 
@@ -291,6 +291,15 @@ vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
 vim.keymap.set("x", "<A-j>", ":move '>.+1<CR>gv-gv", opts)
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+-- Format
+vim.keymap.set("n", "<leader>ft", ":Format<CR>", opts)
+
+-- Source init.lua file
+-- FIXME: unable to evaluate the env variable
+vim.keymap.set("n", "<leader>so", ":source $MYINIT<CR>", opts)
+-- Neotree
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -332,8 +341,40 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-      'bash' },
+    ensure_installed = {
+      'bash',
+      'c',
+      'css',
+      'csv',
+      'dockerfile',
+      'fish',
+      'git_config',
+      'git_rebase',
+      'gitattributes',
+      'gitcommit',
+      'gitignore',
+      'go',
+      'html',
+      'htmldjango',
+      'javascript',
+      'jsdoc',
+      'json',
+      'json5',
+      'lua',
+      'python',
+      'racket',
+      'rust',
+      'scheme',
+      'sql',
+      'svelte',
+      'terraform',
+      'toml',
+      'tsx',
+      'typescript',
+      'vim',
+      'vimdoc',
+      'yaml'
+    },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -488,11 +529,8 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-  prettierd = {},
-  ruff_ls = {},
   rust_analyzer = {},
-  sqlfluff = {},
-  sqlfmt = {},
+  sqlls = {},
   svelte = {},
   tailwindcss = {},
   taplo = {},
@@ -501,6 +539,7 @@ local servers = {
   zk = {},
 }
 
+vim.keymap.set("n", "<leader>e", ":Neotree toggle", { noremap = true, silent = true })
 -- Setup neovim lua configuration
 require('neodev').setup()
 
