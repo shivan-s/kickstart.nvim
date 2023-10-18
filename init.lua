@@ -332,9 +332,40 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-      'bash' },
-
+    ensure_installed = {
+      'bash',
+      'c',
+      'css',
+      'csv',
+      'dockerfile',
+      'fish',
+      'git_config',
+      'git_rebase',
+      'gitattributes',
+      'gitcommit',
+      'gitignore',
+      'go',
+      'html',
+      'htmldjango',
+      'javascript',
+      'jsdoc',
+      'json',
+      'json5',
+      'lua',
+      'python',
+      'racket',
+      'rust',
+      'scheme',
+      'sql',
+      'svelte',
+      'terraform',
+      'toml',
+      'tsx',
+      'typescript',
+      'vim',
+      'vimdoc',
+      'yaml'
+    },
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
 
@@ -399,7 +430,7 @@ end, 0)
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
@@ -488,12 +519,9 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-  prettierd = {},
-  ruff_ls = {},
   rust_analyzer = {},
-  sqlfluff = {},
-  sqlfmt = {},
   svelte = {},
+  sqlls = {},
   tailwindcss = {},
   taplo = {},
   tsserver = {},
