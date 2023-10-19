@@ -243,7 +243,7 @@ vim.o.cursorline = true
 vim.o.scrolloff = 8
 
 -- Wrap
-vim.o.wrap = false
+vim.o.nowrap = true
 
 -- [[ Basic Keymaps ]]
 
@@ -292,6 +292,15 @@ vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", opts)
 vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
 vim.keymap.set("x", "<A-j>", ":move '>.+1<CR>gv-gv", opts)
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
+-- Format
+vim.keymap.set("n", "<leader>ft", ":Format<CR>", opts)
+
+-- Source init.lua file
+-- FIXME: unable to evaluate the env variable
+vim.keymap.set("n", "<leader>so", ":source $MYINIT<CR>", opts)
+-- Neotree
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -546,6 +555,7 @@ local servers = {
   zk = {},
 }
 
+vim.keymap.set("n", "<leader>e", ":Neotree toggle", { noremap = true, silent = true })
 -- Setup neovim lua configuration
 require('neodev').setup()
 
