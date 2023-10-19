@@ -14,7 +14,9 @@ return {
 				html = { { "prettierd", "prettier" } },
 				json = { { "prettierd", "prettier" } },
 				css = { { "prettierd", "prettier" } },
-				sql = { { "sql_formatter", "pg_format" } }
+				sql = { "sql_formatter" },
+				["*"] = { "codespell" },
+				["_"] = { "trim_newline", "trim_whitespace", "" },
 			},
 			format_on_save = {
 				lsp_fallback = true,

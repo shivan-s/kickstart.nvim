@@ -599,6 +599,7 @@ mason_tool_installer.setup({
     'ruff',
     'sqlfluff',
     'sql-formatter',
+    'codespell',
   }
 })
 
