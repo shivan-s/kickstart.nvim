@@ -44,6 +44,7 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -236,6 +237,7 @@ vim.o.colorcolumn = "80"
 
 -- Cursor
 vim.o.guicursor = "i:hor100"
+vim.o.cursorline = true
 
 -- Scrolloff
 vim.o.scrolloff = 8
@@ -293,10 +295,18 @@ vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
+    prompt_prefix = " ",
+    selection_caret = " ",
+    path_display = { "smart" },
     mappings = {
       i = {
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
@@ -509,7 +519,6 @@ local servers = {
   eslint = {},
   gopls = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
-  jedi_language_server = {},
   -- More settings for jsonls
   -- https://github.com/shivan-s/dotfiles/blob/5fad6c102fb756f1cd811635bb4dec91ba06738f/nvim/lua/user/lsp/settings/jsonls.lua
   jsonls = {},
@@ -519,9 +528,13 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  jedi_language_server = {},
+  ruff_lsp = {
+    hoverProvider = false,
+  },
   rust_analyzer = {},
-  svelte = {},
   sqlls = {},
+  svelte = {},
   tailwindcss = {},
   taplo = {},
   tsserver = {},
@@ -553,6 +566,17 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+local mason_tool_installer = require('mason-tool-installer')
+mason_tool_installer.setup({
+  ensure_installed = {
+    'prettierd',
+    'eslint_d',
+    'ruff',
+    'sqlfluff',
+    'sql-formatter',
+  }
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
