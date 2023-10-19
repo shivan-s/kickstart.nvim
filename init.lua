@@ -45,6 +45,7 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -294,11 +295,17 @@ vim.keymap.set("x", "<A-j>", ":move '>.+1<CR>gv-gv", opts)
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Format
-vim.keymap.set("n", "<leader>ft", ":Format<CR>", opts)
+vim.keymap.set("n", "<leader>ft", "<cmd>Format<CR>", opts)
 
 -- Source init.lua file
 -- FIXME: unable to evaluate the env variable
-vim.keymap.set("n", "<leader>so", ":source $MYINIT<CR>", opts)
+vim.keymap.set("n", "<leader>so", "<cmd>source $MYINIT<CR>", opts)
+
+-- Toggle line numbers
+vim.keymap.set("n", "<leader>tn", "<cmd>set nu! nu?<CR>",
+  { noremap = true, silent = true, desc = "[T]oggle line [N]umber" })
+vim.keymap.set("n", "<leader>tr", "<cmd>set relativenumber! relativenumber?<CR>",
+  { noremap = true, silent = true, desc = "[T]oggle [R]elative line numbers" })
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -385,10 +392,12 @@ vim.defer_fn(function()
       'yaml'
     },
     ignore_install = {},
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
     sync_install = false,
-
+    -- FIXME: autotag not working
+    autotag = {
+      enable = true
+    },
     modules = {},
     highlight = { enable = true },
     indent = { enable = true },
@@ -498,6 +507,10 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
+
+-- Toggle diagnostics
+require('toggle_lsp_diagnostics').init()
+vim.keymap.set('n', '<leader>td', '<cmd>ToggleDiag<CR>', { desc = '[T]oggle [D]iagnostics' })
 
 -- document existing key chains
 require('which-key').register {
