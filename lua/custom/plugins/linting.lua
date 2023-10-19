@@ -4,9 +4,9 @@ return {
 	config = function()
 		local lint = require("lint")
 		lint.linters_by_ft = {
-			javascript = { { "eslint_d", "eslint" } },
-			typescript = { { "eslint_d", "eslint" } },
-			svelte = { { "eslint_d", "eslint" } },
+			javascript = { "eslint_d" },
+			typescript = { "eslint_d" },
+			svelte = { "eslint_d" },
 			sql = { "sqlfluff" },
 			python = { "ruff" }
 		}

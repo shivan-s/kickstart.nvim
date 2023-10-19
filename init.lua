@@ -345,6 +345,7 @@ vim.defer_fn(function()
     ensure_installed = {
       'bash',
       'c',
+      'comment',
       'css',
       'csv',
       'dockerfile',
@@ -376,9 +377,12 @@ vim.defer_fn(function()
       'vimdoc',
       'yaml'
     },
+    ignore_install = {},
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
+    sync_install = false,
 
+    modules = {},
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
