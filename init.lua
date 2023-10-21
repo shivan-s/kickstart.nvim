@@ -542,6 +542,7 @@ local servers = {
   emmet_ls = {},
   eslint = {},
   gopls = {},
+  templ = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   -- More settings for jsonls
   -- https://github.com/shivan-s/dotfiles/blob/5fad6c102fb756f1cd811635bb4dec91ba06738f/nvim/lua/user/lsp/settings/jsonls.lua

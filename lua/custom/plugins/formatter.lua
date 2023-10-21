@@ -4,6 +4,11 @@ return {
 	config = function()
 		local conform = require('conform')
 		conform.setup({
+			formatters = {
+				sqlfluff = {
+					command = "sqlfluff format",
+				},
+			},
 			formatter_by_ft = {
 				lua = { "stylelua" },
 				python = { "ruff_format" },
@@ -14,7 +19,7 @@ return {
 				html = { { "prettierd", "prettier" } },
 				json = { { "prettierd", "prettier" } },
 				css = { { "prettierd", "prettier" } },
-				sql = { "sql_formatter" },
+				sql = { "sqlfluff" },
 				["*"] = { "codespell" },
 				["_"] = { "trim_newline", "trim_whitespace", "" },
 			},
