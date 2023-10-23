@@ -3,5 +3,6 @@ return {
 	dependencies = { "folke/twilight.nvim",
 	},
 	opts = {},
-	vim.keymap.set("n", "<leader>zm", "<cmd>ZenMode<CR>", { silent = false, noremap = false, desc = "[Z]en [M]ode" }),
+	vim.keymap.set("n", "<leader>zm", "<cmd>ZenMode<CR>",
+		{ silent = false, noremap = false, desc = "[Z]en [M]ode" }),
 }

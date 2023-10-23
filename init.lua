@@ -376,6 +376,7 @@ vim.defer_fn(function()
       'jsdoc',
       'json',
       'json5',
+      'markdown',
       'lua',
       'python',
       'racket',
@@ -394,7 +395,6 @@ vim.defer_fn(function()
     ignore_install = {},
     auto_install = false,
     sync_install = false,
-    -- FIXME: autotag not working
     autotag = {
       enable = true
     },
@@ -542,7 +542,6 @@ local servers = {
   emmet_ls = {},
   eslint = {},
   gopls = {},
-  templ = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   -- More settings for jsonls
   -- https://github.com/shivan-s/dotfiles/blob/5fad6c102fb756f1cd811635bb4dec91ba06738f/nvim/lua/user/lsp/settings/jsonls.lua
@@ -553,6 +552,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  marksman = {},
   jedi_language_server = {},
   ruff_lsp = {
     hoverProvider = false,
@@ -601,6 +601,7 @@ mason_tool_installer.setup({
     'sqlfluff',
     'sql-formatter',
     'codespell',
+    'actionlint',
   }
 })
 

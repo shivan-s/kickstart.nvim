@@ -21,7 +21,7 @@ return {
 				css = { { "prettierd", "prettier" } },
 				sql = { "sqlfluff" },
 				["*"] = { "codespell" },
-				["_"] = { "trim_newline", "trim_whitespace", "" },
+				["_"] = { "trim_newline", "trim_whitespace" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
