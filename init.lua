@@ -598,10 +598,9 @@ mason_tool_installer.setup({
     'prettierd',
     'eslint_d',
     'ruff',
-    'sqlfluff',
-    'sql-formatter',
     'codespell',
     'actionlint',
+    'sql-formatter'
   }
 })
 

@@ -7,8 +7,7 @@ return {
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
 			svelte = { "eslint_d" },
-			sql = { "sqlfluff" },
-			pytho = { "ruff" }
+			python = { "ruff" }
 		}
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
