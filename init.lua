@@ -384,6 +384,7 @@ vim.defer_fn(function()
       'scheme',
       'sql',
       'svelte',
+      'scss',
       'terraform',
       'toml',
       'tsx',
