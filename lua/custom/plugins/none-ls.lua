@@ -13,7 +13,8 @@ return {
 				l.eslint_d,
 				f.prettierd,
 				f.stylua,
-				f.codespell,
+				l.codespell,
+				l.proselint,
 				f.trim_newlines,
 				f.trim_whitespace,
 			}

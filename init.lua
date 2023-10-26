@@ -123,9 +123,7 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
@@ -601,7 +599,9 @@ mason_tool_installer.setup({
     'ruff',
     'codespell',
     'actionlint',
-    'sql-formatter'
+    'sql-formatter',
+    'proselint',
+    'codespell',
   }
 })
 
@@ -655,6 +655,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'neorg' },
   },
 }
 
