@@ -7,7 +7,11 @@ return {
 		local l = none_ls.builtins.diagnostics
 		none_ls.setup({
 			sources = {
+				-- Golang
 				f.gofmt,
+				f.golines,
+				f.goimports,
+				f.goimports_reviser,
 				f.sql_formatter,
 				f.ruff,
 				l.ruff,
