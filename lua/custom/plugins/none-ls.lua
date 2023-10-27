@@ -7,12 +7,12 @@ return {
 		local l = none_ls.builtins.diagnostics
 		none_ls.setup({
 			sources = {
+				f.gofmt,
 				f.sql_formatter,
 				f.ruff,
 				l.ruff,
 				l.eslint_d,
 				f.prettierd,
-				f.stylua,
 				l.codespell,
 				l.proselint,
 				f.trim_newlines,
