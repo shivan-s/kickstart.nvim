@@ -17,7 +17,10 @@ return {
 				l.proselint,
 				f.trim_newlines,
 				f.trim_whitespace,
-			}
+			},
+			should_attach = function(bufnr)
+				return not vim.api.nvim_buf_get_name(bufnr):match("NvimTree")
+			end
 		})
 	end
 }
