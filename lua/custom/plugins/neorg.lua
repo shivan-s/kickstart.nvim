@@ -25,7 +25,11 @@ return {
 						strategy = "default"
 					}
 				},
-				["external.templates"] = {}
+				["external.templates"] = {
+					config = {
+						templates_dir = "~/.config/neorg/templates"
+					}
+				}
 			},
 		}
 		vim.keymap.set("n", "<leader>no", "<cmd>Neorg<CR>", { noremap = true, silent = true, desc = "[N]e[O]rg" })
