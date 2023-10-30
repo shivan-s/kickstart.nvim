@@ -46,8 +46,10 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
-      -- FIXME: navic does not work
+      -- FIXME: navic and navbuddy does not work
       "SmiteshP/nvim-navic",
+      "SmiteshP/nvim-navbuddy",
+      "MunifTanjim/nui.nvim",
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -462,9 +464,11 @@ local on_attach = function(client, bufnr)
   --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
+  local navic = require("nvim-navic")
+  local navbuddy = require("nvim-navbuddy")
   if client.server_capabilities.documentSymbolProvider then
-    local navic = require("nvim-navic")
     navic.attach(client, bufnr)
+    navbuddy.attach(client, bufnr)
   end
   local nmap = function(keys, func, desc)
     if desc then
