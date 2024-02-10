@@ -158,12 +158,13 @@ require('lazy').setup({
       },
     },
   },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      -- Needed for templ
+      "vrischmann/tree-sitter-templ"
     },
     build = ':TSUpdate',
   },
@@ -341,6 +342,14 @@ vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
+
+-- [[ Additional Filetypes ]]
+vim.filetype.add({
+  extension = {
+    templ = "templ"
+  }
+})
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
@@ -376,6 +385,7 @@ vim.defer_fn(function()
       'sql',
       'svelte',
       'scss',
+      'templ',
       'terraform',
       'toml',
       'tsx',
@@ -391,7 +401,7 @@ vim.defer_fn(function()
       enable = true
     },
     modules = {},
-    highlight = { enable = true },
+    highlight = { enable = true, additional_vim_regex_highlighting = false },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
@@ -448,6 +458,17 @@ vim.defer_fn(function()
     },
   }
 end, 0)
+
+-- For adding templ, which is not an available parser, yet
+local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+treesitter_parser_config.templ = {
+  install_info = {
+    url = "https://github.com/vrischmann/tree-sitter-templ.git",
+    files = { "src/parser.c", "src/scanner.c" },
+    branch = "master",
+  },
+}
+vim.treesitter.language.register('templ', 'templ')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
