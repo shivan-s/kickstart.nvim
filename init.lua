@@ -236,6 +236,7 @@ vim.o.cursorline = true
 vim.o.scrolloff = 8
 
 -- Wrap
+vim.o.wrap = false
 vim.o.nowrap = true
 
 -- [[ Basic Keymaps ]]
