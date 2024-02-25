@@ -21,6 +21,7 @@ return {
 				l.proselint,
 				f.trim_newlines,
 				f.trim_whitespace,
+				f.dart_format,
 			},
 			should_attach = function(bufnr)
 				return not vim.api.nvim_buf_get_name(bufnr):match("NvimTree")

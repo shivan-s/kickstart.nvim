@@ -393,7 +393,8 @@ vim.defer_fn(function()
       'typescript',
       'vim',
       'vimdoc',
-      'yaml'
+      'yaml',
+      'dart'
     },
     ignore_install = {},
     auto_install = false,
@@ -586,6 +587,9 @@ local servers = {
   yamlls = { keyOrdering = false },
   zk = {},
 }
+
+-- dart
+require('lspconfig').dartls.setup({})
 
 -- Setup neovim lua configuration
 require('neodev').setup()
