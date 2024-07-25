@@ -237,7 +237,6 @@ vim.o.scrolloff = 8
 
 -- Wrap
 vim.o.wrap = false
-vim.o.nowrap = true
 
 -- [[ Basic Keymaps ]]
 
@@ -534,7 +533,7 @@ require('toggle_lsp_diagnostics').init()
 vim.keymap.set('n', '<leader>td', '<cmd>ToggleDiag<CR>', { desc = '[T]oggle [D]iagnostics' })
 
 -- document existing key chains
-require('which-key').register {
+require('which-key').add {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
