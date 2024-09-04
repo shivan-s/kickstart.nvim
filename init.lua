@@ -76,8 +76,60 @@ require('lazy').setup({
     },
   },
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  {                     -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    opts = {
+      icons = {
+        -- set icon mappings to true if you have a Nerd Font
+        mappings = vim.g.have_nerd_font,
+        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+        -- default whick-key.nvim defined Nerd Font icons, otherwise define a string table
+        keys = vim.g.have_nerd_font and {} or {
+          Up = '<Up> ',
+          Down = '<Down> ',
+          Left = '<Left> ',
+          Right = '<Right> ',
+          C = '<C-…> ',
+          M = '<M-…> ',
+          D = '<D-…> ',
+          S = '<S-…> ',
+          CR = '<CR> ',
+          Esc = '<Esc> ',
+          ScrollWheelDown = '<ScrollWheelDown> ',
+          ScrollWheelUp = '<ScrollWheelUp> ',
+          NL = '<NL> ',
+          BS = '<BS> ',
+          Space = '<Space> ',
+          Tab = '<Tab> ',
+          F1 = '<F1>',
+          F2 = '<F2>',
+          F3 = '<F3>',
+          F4 = '<F4>',
+          F5 = '<F5>',
+          F6 = '<F6>',
+          F7 = '<F7>',
+          F8 = '<F8>',
+          F9 = '<F9>',
+          F10 = '<F10>',
+          F11 = '<F11>',
+          F12 = '<F12>',
+        },
+      },
+
+      -- Document existing key chains
+      spec = {
+        { '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      },
+    },
+  },
+
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -90,30 +142,6 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
-      on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-
-        -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
-      end,
     },
   },
 
@@ -143,7 +171,7 @@ require('lazy').setup({
     opts = {},
   },
 
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -217,6 +245,7 @@ vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
+-- Displays which-key popup sooner
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
@@ -362,6 +391,7 @@ vim.defer_fn(function()
       'comment',
       'css',
       'csv',
+      'dart',
       'dockerfile',
       'fish',
       'git_config',
@@ -376,15 +406,16 @@ vim.defer_fn(function()
       'jsdoc',
       'json',
       'json5',
-      'markdown',
       'lua',
+      'markdown',
       'python',
       'racket',
+      'regex',
       'rust',
       'scheme',
+      'scss',
       'sql',
       'svelte',
-      'scss',
       'templ',
       'terraform',
       'toml',
@@ -393,7 +424,6 @@ vim.defer_fn(function()
       'vim',
       'vimdoc',
       'yaml',
-      'dart'
     },
     ignore_install = {},
     auto_install = false,
@@ -531,17 +561,6 @@ end
 -- Toggle diagnostics
 require('toggle_lsp_diagnostics').init()
 vim.keymap.set('n', '<leader>td', '<cmd>ToggleDiag<CR>', { desc = '[T]oggle [D]iagnostics' })
-
--- document existing key chains
-require('which-key').add {
-  { '<leader>c', name = '[C]ode',      hidden = true },
-  { '<leader>d', name = '[D]ocument',  hidden = true },
-  { '<leader>g', name = '[G]it',       hidden = true },
-  { '<leader>h', name = 'More git',    hidden = true },
-  { '<leader>r', name = '[R]ename',    hidden = true },
-  { '<leader>s', name = '[S]earch',    hidden = true },
-  { '<leader>w', name = '[W]orkspace', hidden = true },
-}
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
