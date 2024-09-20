@@ -266,6 +266,9 @@ vim.o.scrolloff = 8
 -- Wrap
 vim.o.wrap = false
 
+-- Highlight & set transparent background
+vim.api.nvim_set_hl(0, "Normal", { ctermfg=NONE,  guibg=NONE })
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
