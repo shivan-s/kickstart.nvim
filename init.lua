@@ -492,7 +492,7 @@ vim.defer_fn(function()
   }
 end, 0)
 
--- For adding templ, which is not an available parser, yet
+-- Adding to the parser
 local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 treesitter_parser_config.templ = {
   install_info = {
@@ -501,6 +501,7 @@ treesitter_parser_config.templ = {
     branch = "master",
   },
 }
+treesitter_parser_config.mdx = "markdown"
 vim.treesitter.language.register('templ', 'templ')
 
 -- Diagnostic keymaps
@@ -603,6 +604,7 @@ local servers = {
   svelte = {},
   tailwindcss = {},
   taplo = {},
+  terraformls = {},
   tsserver = {},
   yamlls = { keyOrdering = false },
   zk = {},
