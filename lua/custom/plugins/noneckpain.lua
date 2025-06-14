@@ -1,4 +1,7 @@
 return {
 	'shortcuts/no-neck-pain.nvim',
-	version = "*"
+	version = "*",
+	mappings = {
+		toggle = "<Leader>np"
+	}
 }
