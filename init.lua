@@ -56,7 +56,7 @@ require('lazy').setup({
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      'folke/lazydev.nvim',
     },
   },
 
@@ -267,7 +267,7 @@ vim.o.scrolloff = 8
 vim.o.wrap = false
 
 -- Highlight & set transparent background
-vim.api.nvim_set_hl(0, "Normal", { ctermfg = NONE, guibg = NONE })
+vim.api.nvim_set_hl(0, "Normal", { ctermfg = nil, guibg = nil })
 
 -- [[ Basic Keymaps ]]
 
@@ -592,6 +592,7 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = { globals = { 'vim' }, }
     },
   },
   marksman = {},
@@ -614,7 +615,7 @@ local servers = {
 require('lspconfig').dartls.setup({})
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require('lazydev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -626,6 +627,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
   automatic_installation = true,
+  automatic_enable = true,
 }
 
 mason_lspconfig.setup_handlers {
