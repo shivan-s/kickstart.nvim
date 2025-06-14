@@ -1,3 +1,5 @@
 .luarc.json
-user-specific.lua
+nvim
+
+spell/
 lazy-lock.json
