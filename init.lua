@@ -387,7 +387,6 @@ require('lazy').setup({
         -- LSP Servers
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         -- TODO: Look into https://github.com/pmizio/typescript-tools.nvim
-        ts_ls = {},
         cssls = {},
         dockerls = {},
         emmet_ls = {},
@@ -532,7 +531,7 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       require('catppuccin').setup {
-        flavour = 'auto', -- latte, frappe, macchiato, mocha
+        flavour = 'mocha', -- latte, frappe, macchiato, mocha
         background = { -- :h background
           light = 'latte',
           dark = 'mocha',
@@ -552,7 +551,7 @@ require('lazy').setup({
           comments = { 'italic' },
           conditionals = { 'italic' },
           loops = {},
-          functions = {},
+          functions = { 'bold' },
           keywords = {},
           strings = {},
           variables = {},
@@ -653,6 +652,7 @@ require('lazy').setup({
         'gitcommit',
         'gitignore',
         'html',
+        'java',
         'javascript',
         'jsdoc',
         'json',
