@@ -398,7 +398,7 @@ require('lazy').setup({
         jedi_language_server = {},
         ruff = { hoverProvider = false },
         rust_analyzer = {},
-        sqlls = {},
+        postgrestools = {},
         svelte = {},
         tailwindcss = {},
         taplo = {},
