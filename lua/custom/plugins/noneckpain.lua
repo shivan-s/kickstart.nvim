@@ -2,15 +2,15 @@ vim.api.nvim_set_keymap('n', '<Leader>np', '<cmd>NoNeckPain<CR>', { noremap = tr
 vim.api.nvim_create_autocmd('User', {
   pattern = 'NoNeckPainEnable',
   callback = function()
-    vim.opt.wrap = true
-    vim.opt.linebreak = true
+    vim.o.wrap = true
+    vim.o.linebreak = true
   end,
 })
 vim.api.nvim_create_autocmd('User', {
   pattern = 'NoNeckPainDisable',
   callback = function()
-    vim.opt.wrap = false
-    vim.opt.linebreak = false
+    vim.o.wrap = false
+    vim.o.linebreak = false
   end,
 })
 return {
