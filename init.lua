@@ -392,6 +392,8 @@ require('lazy').setup({
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         -- TODO: Look into https://github.com/pmizio/typescript-tools.nvim
         cssls = {},
+        css_variables = {},
+        clangd = {},
         dockerls = {},
         elixirls = {},
         emmet_ls = {},
