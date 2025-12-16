@@ -113,5 +113,14 @@ return {
       end,
       desc = 'Toggle Terminal',
     },
+    -- gitbrowse
+    {
+      '<leader>gB',
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = 'Git Browse',
+      mode = { 'n', 'v' },
+    },
   },
 }
