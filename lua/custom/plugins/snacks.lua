@@ -4,10 +4,13 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    bigfile = { enabled = true },
     lazygit = {
       configure = true,
     },
     terminal = {},
+    quickfile = { enabled = true },
+    scroll = { enabled = true },
   },
   keys = {
     -- find
