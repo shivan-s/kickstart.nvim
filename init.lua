@@ -637,10 +637,41 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
+    lazy = false,
+
+    config = function()
+      ---@param buf integer
+      ---@param language string
+      local function treesitter_try_attach(buf, language)
+        if not vim.treesitter.language.add(language) then
+          return
+        end
+        vim.treesitter.start(buf, language)
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter.indentexpr()"
+      end
+
+      local available_parsers = require('nvim-treesitter').get_available()
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          local buf, fileType = args.buf, args.match
+          local language = vim.treesitter.language.get_lang(fileType)
+          if not language then
+            return
+          end
+
+          local installed_parsers = require('nvim-treesitter').get_installed 'parsers'
+          if vim.tbl_contains(installed_parsers, language) then
+            treesitter_try_attach(buf, language)
+          elseif vim.tbl_contains(available_parsers, language) then
+            require('nvim-treesitter').install(language):await(function()
+              treesitter_try_attach(buf, language)
+            end)
+          else
+            treesitter_try_attach(buf, language)
+          end
+        end,
+      })
+      local parsers = {
         'bash',
         'c',
         'diff',
@@ -673,7 +704,6 @@ require('lazy').setup({
         'regex',
         'rust',
         'scheme',
-        'scss',
         'sql',
         'svelte',
         'terraform',
@@ -683,14 +713,9 @@ require('lazy').setup({
         'vim',
         'vimdoc',
         'yaml',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-      },
-      indent = { enable = true },
-    },
+      }
+      require('nvim-treesitter').install(parsers)
+    end,
   },
 
   -- require 'kickstart.plugins.debug',
