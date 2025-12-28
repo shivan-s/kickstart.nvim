@@ -76,9 +76,8 @@ vim.keymap.set('v', '>', '>gv', opts)
 vim.keymap.set('v', '<', '<gv', opts)
 
 -- Set line break and word wrap
-vim.keymap.set('n', '<leader>lb', '<cmd>set wrap! wrap?<CR>', { noremap = true, silent = true, desc = '[L]ine[B]reak' })
-vim.keymap.set('n', '<leader>wr', '<cmd>set linebreak! linebreak?<CR>', { noremap = true, silent = true, desc = '[W]rap' })
-
+vim.keymap.set('n', '<leader>lb', '<cmd>set linbreak! linebreak?<CR>', { noremap = true, silent = true, desc = '[L]ine[B]reak' })
+vim.keymap.set('n', '<leader>wr', '<cmd>set wrap! wrap?<CR>', { noremap = true, silent = true, desc = '[W][R]ap' })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
