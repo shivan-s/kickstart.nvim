@@ -76,8 +76,8 @@ vim.keymap.set('v', '>', '>gv', opts)
 vim.keymap.set('v', '<', '<gv', opts)
 
 -- Set line break and word wrap
-vim.keymap.set('n', '<leader>lb', '<cmd>set linbreak! linebreak?<CR>', { noremap = true, silent = true, desc = '[L]ine[B]reak' })
-vim.keymap.set('n', '<leader>wr', '<cmd>set wrap! wrap?<CR>', { noremap = true, silent = true, desc = '[W][R]ap' })
+vim.keymap.set('n', '<leader>lb', '<cmd>set linebreak<CR>', { noremap = true, silent = true, desc = '[L]ine[B]reak' })
+vim.keymap.set('n', '<leader>wr', '<cmd>set wrap<CR>', { noremap = true, silent = true, desc = '[W][R]ap' })
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -480,6 +480,9 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         svelte = { 'prettierd', 'prettier', stop_after_first = true },
         sql = { 'sqruff' },
+        c = { 'clang-format' },
+        cpp = { 'clang-format' },
+        cmake = { 'cmake_format' },
       },
     },
   },
@@ -597,39 +600,36 @@ require('lazy').setup({
     'nvim-mini/mini.nvim',
     config = function()
       -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
-
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
-
       -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
       statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
         return '%2l:%-2v'
       end
-
       require('mini.cursorword').setup()
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      -- Animate cursor
+      local animate = require 'mini.animate'
+      animate.setup {
+        cursor = {
+          enable = true,
+        },
+        scroll = {
+          enable = false,
+        },
+        resize = {
+          enable = false,
+        },
+        open = {
+          enable = false,
+        },
+        close = {
+          enable = false,
+        },
+      }
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -672,6 +672,10 @@ require('lazy').setup({
       local parsers = {
         'bash',
         'c',
+        'cpp',
+        'cmake',
+        'css',
+        'commonlisp',
         'diff',
         'html',
         'lua',
@@ -705,6 +709,7 @@ require('lazy').setup({
         'sql',
         'svelte',
         'terraform',
+        'tmux',
         'toml',
         'tsx',
         'typescript',

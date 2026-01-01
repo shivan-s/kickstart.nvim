@@ -22,6 +22,11 @@ return {
         easing = 'linear',
       },
     },
+    zen = {
+      toggles = {
+        dim = true,
+      },
+    },
   },
   keys = {
     -- find
@@ -134,6 +139,24 @@ return {
         Snacks.gitbrowse()
       end,
       desc = 'Git Browse',
+      mode = { 'n', 'v' },
+    },
+    -- zen mode
+    {
+      '<leader>zm',
+      function()
+        Snacks.zen()
+      end,
+      desc = '[Z]en [M]mode',
+      mode = { 'n', 'v' },
+    },
+    -- buffer delete
+    {
+      '<leader>bd',
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = '[b]uffer [d]elete',
       mode = { 'n', 'v' },
     },
   },
