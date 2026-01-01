@@ -376,43 +376,25 @@ require('lazy').setup({
       }
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- LSP Servers
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         -- TODO: Look into https://github.com/pmizio/typescript-tools.nvim
-        cssls = {},
-        css_variables = {},
         clangd = {},
+        codebook = {},
+        css_variables = {},
+        cssls = {},
         dockerls = {},
         elixirls = {},
         emmet_ls = {},
         eslint = {},
         gopls = {},
+        harper_ls = {
+          filetypes = { 'markdown' },
+          settings = { ['harper_ls'] = { linters = { SentenceCapitalization = false, SpellCheck = false } } },
+        },
         html = { filetypes = { 'html', 'twig', 'hbs' } },
         jsonls = {},
-        mdx_analyzer = {},
-        marksman = {},
-        jedi_language_server = {},
-        ruff = { hoverProvider = false },
-        rust_analyzer = {},
-        stylelint_lsp = {},
-        postgres_lsp = {},
-        svelte = {},
-        tailwindcss = {},
-        taplo = {},
-        terraformls = {},
-        tflint = {},
-        yamlls = { keyOrdering = false },
         lua_ls = {
           settings = {
             Lua = {
@@ -423,6 +405,18 @@ require('lazy').setup({
             },
           },
         },
+        marksman = {},
+        mdx_analyzer = {},
+        postgres_lsp = {},
+        ruff = {},
+        rust_analyzer = {},
+        stylelint_lsp = {},
+        svelte = {},
+        tailwindcss = {},
+        taplo = {},
+        terraformls = {},
+        tflint = {},
+        yamlls = { keyOrdering = false },
       }
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
@@ -480,6 +474,7 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         svelte = { 'prettierd', 'prettier', stop_after_first = true },
         sql = { 'sqruff' },
+        go = { 'gofmt', 'goimports' },
         c = { 'clang-format' },
         cpp = { 'clang-format' },
         cmake = { 'cmake_format' },
