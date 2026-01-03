@@ -98,6 +98,14 @@ return {
       toggles = {
         dim = true,
       },
+      on_open = function()
+        vim.wo.wrap = true
+        vim.wo.linebreak = true
+      end,
+      on_close = function()
+        vim.wo.wrap = false
+        vim.wo.linebreak = false
+      end,
     },
   },
   keys = {
@@ -196,14 +204,6 @@ return {
       end,
       desc = 'GitHub Pull Requests (all)',
     },
-    -- terminal
-    {
-      '<c-/>',
-      function()
-        Snacks.terminal()
-      end,
-      desc = 'Toggle Terminal',
-    },
     -- gitbrowse
     {
       '<leader>gB',
@@ -229,6 +229,22 @@ return {
         Snacks.bufdelete()
       end,
       desc = '[b]uffer [d]elete',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>bda',
+      function()
+        Snacks.bufdelete.all()
+      end,
+      desc = '[b]uffer [d]elete [a]ll',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>bdo',
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = '[b]uffer [d]elete [o]ther',
       mode = { 'n', 'v' },
     },
   },
