@@ -448,6 +448,8 @@ require('lazy').setup({
         terraformls = {},
         tflint = {},
         yamlls = { keyOrdering = false },
+        zls = {},
+        zk = {},
       }
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
@@ -502,10 +504,12 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         svelte = { 'prettierd', 'prettier', stop_after_first = true },
         sql = { 'sqruff' },
+        scheme = { 'racket-langserver' },
         go = { 'gofmt', 'goimports' },
         c = { 'clang-format' },
         cpp = { 'clang-format' },
         cmake = { 'cmake_format' },
+        zig = { 'zig', 'fmt' },
       },
     },
   },
